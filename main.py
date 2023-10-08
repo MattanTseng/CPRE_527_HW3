@@ -50,6 +50,9 @@ if __name__ == '__main__':
     # model = Net()
     model = Net_500k()
 
+    # Here is the line where we add dataparallels
+    model = torch.nn.DataParallel(model, device_ids=[0, 1, 2])
+
     # create a directory to hold the results
     dir_name = "E_" + str(n_epochs) + "_lr_" + str(learning_rate) + "_BS_" + str(hyper_params["batch_size"]) + "_" + model.__str__() 
     output_location = os.path.join(current_dir, dir_name)
