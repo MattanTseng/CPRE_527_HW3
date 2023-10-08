@@ -51,7 +51,7 @@ if __name__ == '__main__':
     model = Net_500k()
 
     # Here is the line where we add dataparallels
-    # model = torch.nn.DataParallel(model, device_ids=[0, 1])
+    model = torch.nn.DataParallel(model, device_ids=[0, 1])
 
     # Here is where we do quantization 
     print("Model is being quantized")
