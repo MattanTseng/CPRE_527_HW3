@@ -54,7 +54,7 @@ if __name__ == '__main__':
     model = torch.nn.DataParallel(model, device_ids=[0, 1])
 
     # create a directory to hold the results
-    dir_name = "E_" + str(n_epochs) + "_lr_" + str(learning_rate) + "_BS_" + str(hyper_params["batch_size"]) + "_" + model.__str__() 
+    dir_name = "2_GPUs_V1" + str(time.time())#"E_" + str(n_epochs) + "_lr_" + str(learning_rate) + "_BS_" + str(hyper_params["batch_size"]) + "_" + model.__str__() 
     output_location = os.path.join(current_dir, dir_name)
 
     # instantiate the analytics generator
