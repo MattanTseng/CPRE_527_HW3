@@ -26,7 +26,7 @@ if __name__ == '__main__':
     current_dir = os.path.dirname(current_file_path)
 
     # use runtime command to differentiate between different config files
-    config_file_name = "hyperparameters" + sys.argv[1] + ".YAML"
+    config_file_name = "hyperparameters" + str(1) + ".YAML"
 
     # based on where this file is.... locate the hyper parameter file. 
     config_location = os.path.join(current_dir, config_file_name)
