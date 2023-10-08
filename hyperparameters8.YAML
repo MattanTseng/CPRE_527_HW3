@@ -1,0 +1,5 @@
+batch_size: 20
+epochs: 25
+learning_rate: 0.07525000000000001
+train_ratio: 0.9
+validation_ratio: 0.1

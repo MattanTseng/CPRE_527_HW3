@@ -1,0 +1,7 @@
+batch_size: 20
+device: !!python/object/apply:torch.device
+- mps
+epochs: 25
+learning_rate: 0.025750000000000002
+test_accuracy: 10.0
+training_time: 4674.526663303375
