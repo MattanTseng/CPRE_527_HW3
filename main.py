@@ -38,6 +38,7 @@ if __name__ == '__main__':
     n_epochs = hyper_params["epochs"]
     learning_rate = hyper_params["learning_rate"]
     
+    print("Using device: ", device)
 
     print("Hyperparameters: \n", hyper_params)
 
@@ -46,8 +47,8 @@ if __name__ == '__main__':
     validation_accuracies = np.empty(0)
 
     # which model do you want to run? 
-    model = Net()
-    # model = Net_500k()
+    # model = Net()
+    model = Net_500k()
 
     # create a directory to hold the results
     dir_name = "E_" + str(n_epochs) + "_lr_" + str(learning_rate) + "_BS_" + str(hyper_params["batch_size"]) + "_" + model.__str__() 
