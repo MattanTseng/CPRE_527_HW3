@@ -51,7 +51,12 @@ if __name__ == '__main__':
     model = Net_500k()
 
     # Here is the line where we add dataparallels
-    model = torch.nn.DataParallel(model, device_ids=[0, 1])
+    # model = torch.nn.DataParallel(model, device_ids=[0, 1])
+
+    # Here is where we do quantization 
+    print("Model is being quantized")
+    model_int8 = torch.ao.quantization.convert(model)
+
 
     # create a directory to hold the results
     dir_name = "2_GPUs_V1" + str(time.time())#"E_" + str(n_epochs) + "_lr_" + str(learning_rate) + "_BS_" + str(hyper_params["batch_size"]) + "_" + model.__str__() 
