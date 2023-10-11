@@ -74,7 +74,7 @@ if __name__ == '__main__':
     model.train(True)
     for epoch in range(1):
         #train
-        mean_train_losses = np.concatenate((mean_train_losses, training_step(model, train_loader, epoch, device, learning_rate)))
+        mean_train_losses = np.concatenate((mean_train_losses, resnet_training_step(model, train_loader, epoch, device, learning_rate)))
         # run validation set
         validation_accuracies = np.concatenate((validation_accuracies, np.array([evaluate(model, val_loader, device)])))
         print("-"*10,"Training finshed","-"*10)
