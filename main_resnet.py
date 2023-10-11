@@ -1,5 +1,5 @@
-from src import parallel_resnet, config_loader, load_cifar10_for_resnet, resnet_training_step, evaluate
-from src.parallel_resnet import singleGPUResNet50, ModelParallelResNet50
+from src import parallel_resnet,load_cifar10, config_loader, load_cifar10_for_resnet, resnet_training_step, evaluate, training_step
+from src.parallel_resnet import singleGPUResNet50, ModelParallelResNet50, SimpleParallel
 import numpy as np
 import time
 import torch
@@ -50,7 +50,7 @@ if __name__ == '__main__':
     # model = Net()
 
     # model = singleGPUResNet50()
-    model = ModelParallelResNet50()
+    model = SimpleParallel()
 
 
     # create a directory to hold the results
@@ -65,7 +65,7 @@ if __name__ == '__main__':
 
     # load up the data (based on TAs code)
     print("loading data: ")
-    train_loader, test_loader,val_loader, classes = load_cifar10_for_resnet(hyper_params)
+    train_loader, test_loader,val_loader, classes = load_cifar10(hyper_params)
 
 
     # here's were we actually do the training
@@ -74,7 +74,7 @@ if __name__ == '__main__':
     model.train(True)
     for epoch in range(1):
         #train
-        mean_train_losses = np.concatenate((mean_train_losses, resnet_training_step(model, train_loader, epoch, device, learning_rate)))
+        mean_train_losses = np.concatenate((mean_train_losses, training_step(model, train_loader, epoch, device, learning_rate)))
         # run validation set
         validation_accuracies = np.concatenate((validation_accuracies, np.array([evaluate(model, val_loader, device)])))
         print("-"*10,"Training finshed","-"*10)
