@@ -11,7 +11,7 @@ def evaluate(model, test_loader, device: str):
             inputs, labels = data
             # make sure data is on the correct hardware
             inputs, labels = inputs.to(device), labels.to(device)
-
+            model.to(device)
             # run the input through the model
             outputs = model(inputs)
             # what is the prediction?
