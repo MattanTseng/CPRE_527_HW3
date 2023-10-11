@@ -10,8 +10,8 @@ def evaluate(model, test_loader, device: str):
             # load up the data
             inputs, labels = data
             # make sure data is on the correct hardware
-            inputs, labels = inputs.to(device), labels.to(device)
-            model.to(device)
+            inputs, labels = inputs.to(model.device), labels.to(model.device)
+
             # run the input through the model
             outputs = model(inputs)
             # what is the prediction?
