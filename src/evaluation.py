@@ -9,12 +9,10 @@ def evaluate(model, test_loader, device: str):
         for data in test_loader:
             # load up the data
             inputs, labels = data
-            # make sure data is on the correct hardware
-            inputs, labels = inputs.to(model.device), labels.to(model.device)
 
-            # run the input through the model
-            outputs = model(inputs)
-            # what is the prediction?
+
+            outputs = model(inputs.to('cuda:0'))
+            labels = labels.to(outputs.device)
             _, predicted = torch.max(outputs.data, 1)
 
             total += labels.size(0)
