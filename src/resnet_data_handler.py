@@ -3,9 +3,7 @@ import torchvision
 import torchvision.transforms as transforms
 from sklearn.model_selection import train_test_split
 
-
-# based on code from TA
-def load_cifar10(hyperparameters: dict):
+def load_cifar10_for_resnet(hyperparameters:dict):
 
     # pull out the ratio of images that are going to be used for training
     train_ratio =  hyperparameters["train_ratio"]
@@ -14,9 +12,9 @@ def load_cifar10(hyperparameters: dict):
     batch_size = hyperparameters["batch_size"]
     
     # Define transformations for the images
-    transform = transforms.Compose(
-        [transforms.ToTensor(),
-        transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
+    transform = transforms.Compose([
+        transforms.Resize((224, 224)),  # Resize CIFAR-10 images to the input size of ResNet-50
+        transforms.ToTensor(),])
 
     
     all_cifar_data = torchvision.datasets.CIFAR10(root='./data', train=True,
@@ -47,4 +45,3 @@ def load_cifar10(hyperparameters: dict):
            'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
     
     return train_loader,val_loader, test_loader,class_names
-
