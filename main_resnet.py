@@ -1,4 +1,4 @@
-from src import parallel_resnet, config_loader, load_cifar10_for_resnet, training_step, evaluate
+from src import parallel_resnet, config_loader, load_cifar10_for_resnet, resnet_training_step, evaluate
 from src.parallel_resnet import singleGPUResNet50, ModelParallelResNet50
 import numpy as np
 import time
@@ -71,9 +71,10 @@ if __name__ == '__main__':
     # here's were we actually do the training
     print("Starting training: ")
     start_time = time.time()
+    model.train(True)
     for epoch in range(1):
         #train
-        mean_train_losses = np.concatenate((mean_train_losses, training_step(model, train_loader, epoch, device, learning_rate)))
+        mean_train_losses = np.concatenate((mean_train_losses, resnet_training_step(model, train_loader, epoch, device, learning_rate)))
         # run validation set
         validation_accuracies = np.concatenate((validation_accuracies, np.array([evaluate(model, val_loader, device)])))
         print("-"*10,"Training finshed","-"*10)
@@ -82,7 +83,7 @@ if __name__ == '__main__':
     end_time = time.time()
     print("Done training")
     run_time = end_time - start_time
-
+    model.train(False)
     test_accuracy = evaluate(model, test_loader, device)
 
     # create the graphs

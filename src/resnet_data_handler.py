@@ -14,7 +14,9 @@ def load_cifar10_for_resnet(hyperparameters:dict):
     # Define transformations for the images
     transform = transforms.Compose([
         transforms.Resize((224, 224)),  # Resize CIFAR-10 images to the input size of ResNet-50
-        transforms.ToTensor(),])
+        transforms.ToTensor(),    
+        transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])  # ImageNet normalization
+    ])
 
     
     all_cifar_data = torchvision.datasets.CIFAR10(root='./data', train=True,
