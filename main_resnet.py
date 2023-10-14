@@ -1,5 +1,5 @@
 from src import parallel_resnet,load_cifar10, config_loader, load_cifar10_for_resnet, resnet_training_step, evaluate, training_step
-from src.parallel_resnet import singleGPUResNet50, ModelParallelResNet50, SimpleParallel
+from src.parallel_resnet import singleGPUResNet50, ModelParallelResNet50, SimpleParallel, Parallel_Net_500k
 import numpy as np
 import time
 import torch
@@ -50,7 +50,7 @@ if __name__ == '__main__':
     # model = Net()
 
     # model = singleGPUResNet50()
-    model = SimpleParallel()
+    model = Parallel_Net_500k()
 
 
     # create a directory to hold the results
